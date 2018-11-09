@@ -51,3 +51,23 @@ elternteil(roberta,susan).
 elternteil(peter,melissa).
 elternteil(harriet,melissa).
 
+ungleich(X,Y) :- X\=Y.
+
+vater(X,Y) :- elternteil(X,Y), maennlich(X).
+kind(X,Y) :- elternteil(Y,X).
+sohn(X,Y) :- kind(X,Y), maennlich(X).
+tochter(X,Y) :- kind(X,Y), weiblich(X).
+
+verheiratet(X,Y) :- elternteil(X,Z), elternteil(Y,Z), ungleich(X, Y).
+
+mutter(X, Y) :- weiblich(X), elternteil(X, Y).
+schwiegermutter(X,Y) :- verheiratet(Y,Z), mutter(X,Z).
+schwiegervater(X, Y) :- verheiratet(Y,Z), vater(X,Z).
+
+grossmutter(X,Y) :- mutter(X,Z), elternteil(Z,Y).
+grossvater(X,Y) :- vater(X,Z), elternteil(Z,Y).
+
+bruder(X,Y) :- maennlich(X), elternteil(Z,X), elternteil(Z,Y), ungleich(X, Y).
+
+
+
